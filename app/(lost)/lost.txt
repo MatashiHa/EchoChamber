@@ -1,0 +1,25 @@
+// это для того, чтобы делать поиск серверов
+import { initialProfile } from "@/lib/initial-profile";
+import { db } from "@/lib/db";
+import { redirect } from "next/navigation";
+const SetupPage =async () => {
+
+  const profile = await initialProfile();
+    const chamber  = await db.chamber.findFirst({
+        where: {
+            members: {
+                some:
+                {
+                    profileId: profile.id
+                }
+            }
+        }
+
+    })
+    if(chamber)
+    {
+        return redirect(`/chambers/${chamber.id}`)
+    }    return <div>You've been logged in!</div>;
+}
+ 
+export default SetupPage;

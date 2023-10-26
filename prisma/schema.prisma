@@ -21,8 +21,8 @@ model Profile {
   members  Member[]
   channels Channel[]
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Chamber {
@@ -37,8 +37,8 @@ model Chamber {
   members  Member[]
   channels Channel[]
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([profileId])
 }
@@ -58,8 +58,8 @@ model Member {
   chamberId String
   chamber   Chamber @relation(fields: [chamberId], references: [id], onDelete: Cascade)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([profileId])
   @@index([chamberId])
@@ -81,8 +81,8 @@ model Channel {
   chamberId String
   chamber   Chamber @relation(fields: [chamberId], references: [id], onDelete: Cascade)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([profileId])
   @@index([chamberId])

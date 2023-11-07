@@ -21,7 +21,7 @@ export default function RootLayout({
     <ClerkProvider>
    <html lang="en" suppressHydrationWarning>
       <body className={cn(font.className,
-      "bg-sky-100 dark:bg-slate-800 ")
+      "bg-rose-50 dark:bg-slate-800 ")
       }>
         {/* Именно в строке выше мы делаем свои кастомные светлую и тёмную темы */}
         <ThemeProvider

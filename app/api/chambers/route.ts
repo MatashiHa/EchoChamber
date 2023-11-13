@@ -7,7 +7,7 @@ import { MemberRole } from "@prisma/client";
 
 export async function POST(req: Request) {
   try {
-    const { name, imageURL } = await req.json();
+    const { name, imageUrl } = await req.json();
     const profile = await currentProfile();
 
     if (!profile) {
@@ -18,8 +18,7 @@ export async function POST(req: Request) {
       data: {
         profileId: profile.id,
         name,
-        imageUrl: imageURL,
-
+        imageUrl,
         //это код приглашения
         inviteCode: uuidv4(),
         channels: {
@@ -34,7 +33,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(chamber);
   } catch (error) {
-    console.log("[SREVERS_POST]", error);
+    console.log("[CHAMBER_POST]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

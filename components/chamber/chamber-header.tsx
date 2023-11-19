@@ -27,7 +27,7 @@ interface ChamberHeaderProps {
 export const ChamberHeader = ({ chamber, role }: ChamberHeaderProps) => {
   const { onOpen } = useModal();
   const isAdmin = role === MemberRole.ADMIN;
-  const isModerator = isAdmin || MemberRole.MODERATOR;
+  const isModerator = isAdmin || role === MemberRole.MODERATOR;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="focus:outline-none" asChild>

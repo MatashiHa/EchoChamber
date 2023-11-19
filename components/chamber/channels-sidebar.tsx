@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { ChannelType } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { ChamberHeader } from "./chamber-header";
+import { ChamberWithMembersWithProfiles } from "@/types";
 
 interface ChamberSidebarProps {
   chamberId: string;
@@ -29,6 +30,9 @@ export const ChannelsSidebar = async ({ chamberId }: ChamberSidebarProps) => {
         include: {
           profile: true,
         },
+        orderBy: {
+          role: "asc",
+          },
       },
     },
   });

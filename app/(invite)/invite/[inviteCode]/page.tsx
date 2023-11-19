@@ -52,7 +52,7 @@ const InviteCodePage = async ({params}:IviteCodePageProps) => {
         }
     })
     if (chamber){
-        return redirect(`/chamber/${chamber.id}`)
+        return redirect(`/chambers/${chamber.id}`)
     }
     return ( 
        null

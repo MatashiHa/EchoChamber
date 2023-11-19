@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { ChannelType } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { ChamberHeader } from "./chamber-header";
-import { ChamberWithMembersWithProfiles } from "@/types";
+import { ChamberWithMembersWithProfiles } from "@/lib/types";
 
 interface ChamberSidebarProps {
   chamberId: string;
@@ -35,7 +35,7 @@ export const ChannelsSidebar = async ({ chamberId }: ChamberSidebarProps) => {
           },
       },
     },
-  });
+  }) ;
 
   // фильтруем каналы по типам
   const textChannels = chamber?.channels.filter(

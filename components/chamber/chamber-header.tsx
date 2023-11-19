@@ -21,7 +21,7 @@ import {
 
 interface ChamberHeaderProps {
   chamber: Chamber;
-  role?: MemberRole;
+  role: MemberRole;
 }
 
 export const ChamberHeader = ({ chamber, role }: ChamberHeaderProps) => {
@@ -37,6 +37,11 @@ export const ChamberHeader = ({ chamber, role }: ChamberHeaderProps) => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]">
+      <DropdownMenuItem
+            className="text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer"
+          >
+            Your role: {role}
+          </DropdownMenuItem>        
         {isModerator && (
           <DropdownMenuItem
             onClick={() => onOpen("invite", { chamber })}

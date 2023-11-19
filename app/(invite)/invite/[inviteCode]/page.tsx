@@ -1,6 +1,7 @@
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { redirectToSignIn } from "@clerk/nextjs";
+import { MemberRole } from "@prisma/client";
 import { redirect } from "next/navigation";
 
 interface IviteCodePageProps {
@@ -45,7 +46,8 @@ const InviteCodePage = async ({params}:IviteCodePageProps) => {
             members: {
                 create:[
                     {
-                        profileId:profile.id
+                        profileId:profile.id,
+                        role: MemberRole.GUEST
                     }
                 ]
             }

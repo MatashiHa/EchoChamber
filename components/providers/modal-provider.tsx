@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { CreateChamberModal } from "../modals/create-chamber-modal";
+import { InviteModal } from "../modals/invite-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMouted] = useState(false);
@@ -17,6 +18,7 @@ export const ModalProvider = () => {
   return (
     <>
       <CreateChamberModal />
+      <InviteModal/>
     </>
   );
 };

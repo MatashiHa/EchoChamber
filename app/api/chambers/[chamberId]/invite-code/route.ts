@@ -15,6 +15,7 @@ export async function PATCH(
 ) {
   try {
     const profile = await currentProfile();
+
     if (!profile) {
       return new NextResponse("Unaothorized", { status: 401 });
     }

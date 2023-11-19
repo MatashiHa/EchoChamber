@@ -72,7 +72,7 @@ export const InviteModal = () => {
             className="bg-zinc-400/50 border-0 
             focus-visible:ring-0 text-black 
             focus-visible:ring-offset-0"
-            value={inviteURL}
+            value ={inviteURL}
             />
             <Button disabled ={isLoading} onClick={onCopy} size="icon">
               {copied

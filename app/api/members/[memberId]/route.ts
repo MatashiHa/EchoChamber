@@ -21,6 +21,8 @@ export async function DELETE(
     if (!params.memberId) {
       return new NextResponse("Member ID Missing", { status: 400 });
     }
+    console.log("Deletion started");
+
     const chamber = db.chamber.update({
       where: {
         id: chamberId,
@@ -49,6 +51,7 @@ export async function DELETE(
         },
       },
     });
+    console.log("Deletion complete");
     return NextResponse.json(chamber);
   } catch (error) {
     console.log("[MEMBERS_ID_DELETE]", error);

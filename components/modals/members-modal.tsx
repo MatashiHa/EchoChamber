@@ -136,7 +136,7 @@ export const MembersModal = () => {
                 </div>
                 <div>
                   <DropdownMenu>
-                    <DropdownMenuTrigger >
+                    <DropdownMenuTrigger className="py-2">
                       <ActionTooltip side="left" align="center" label="Change Role">
                           <MoreVertical className="h-6 w-6 text-zinc-500"/>
                       </ActionTooltip>

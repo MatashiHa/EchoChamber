@@ -37,6 +37,8 @@ const roleIconMap = {
 }
 
 export const MembersModal = () => {
+  const router = useRouter()
+
   const { isOpen, onOpen, onClose, type, data } = useModal();
 
 
@@ -47,6 +49,26 @@ export const MembersModal = () => {
   const[copied, setCopied] = useState(false);
   const[loadingId, setLoadingId] = useState("");
 
+  const onKick = async (memberId: string) =>{
+    try {
+      setLoadingId(memberId)
+      const url = qs.stringifyUrl({
+        url:`/api/members/${memberId}`,
+        query: {
+          chamberId: chamber?.id
+        }
+      })
+
+      const response = await axios.delete(url)
+      router.refresh()
+      onOpen("members", {chamber : response.data})
+
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoadingId("")
+    }
+  }
   const onRoleChange =async (memberId: string, role: MemberRole) => {
     try {
       setLoadingId(memberId)
@@ -54,13 +76,11 @@ export const MembersModal = () => {
       const url = qs.stringifyUrl({
         url:`/api/members/${memberId}`,
         query: {
-          chamberId: chamber?.id,
-          memberId
+          chamberId: chamber?.id
         }
       })
 
-      const response = await axios.patch(url, {role})
-      const router = useRouter()
+      const response = await axios.patch(url, { role })
       router.refresh()
       onOpen("members", {chamber : response.data})
 
@@ -86,7 +106,7 @@ export const MembersModal = () => {
             </DialogDescription>
           </DialogTitle>
         </DialogHeader>
-        <ScrollArea className="mt-8 max-h-[420px] pr-6">
+        <ScrollArea className="mt-8 max-h-[420px] ">
           {chamber?.members?.map((member) =>(
             <div key={member.id} className="flex items-center gap-x-2 mb-6">
               <UserAvatar src={member.profile.imageUrl}/>
@@ -105,13 +125,16 @@ export const MembersModal = () => {
               </div>
               {chamber.profileId !== member.profileId && loadingId !==  member.id &&
               (
-                <div className="flex justify-end ml-auto">
-                <div className="ms-4">
+                <div className="flex justify-end items-center ml-auto ">
+                <div >
                   <ActionTooltip side="left" align="center" label="Kick">
-                        <Ban  className="h-6 w-6 text-red-500"/>
+                        <Button className="border-0"
+                        onClick={ () => onKick(member.id)}>
+                          <Ban  className="h-6 w-6 text-red-500"/>
+                        </Button>
                   </ActionTooltip>
                 </div>
-                <div className="ms-4">
+                <div>
                   <DropdownMenu>
                     <DropdownMenuTrigger >
                       <ActionTooltip side="left" align="center" label="Change Role">

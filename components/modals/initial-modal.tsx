@@ -30,7 +30,7 @@ const formSchema = z.object({
   name: z.string().min(1, {
     message: "Chamber name is required",
   }),
-  imageURL: z.string().min(1, {
+  imageUrl: z.string().min(1, {
     message: "Chamber image is required",
   }),
 });
@@ -47,7 +47,7 @@ const InitialModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      imageURL: "",
+      imageUrl: "",
     },
   });
 
@@ -55,7 +55,7 @@ const InitialModal = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/api/servers", values);
+      await axios.post("/api/chambers", values);
       form.reset();
       router.refresh();
       window.location.reload();
@@ -84,7 +84,7 @@ const InitialModal = () => {
               <div className="flex items-center justify-center text-center ">
                 <FormField
                   control={form.control}
-                  name="imageURL"
+                  name="imageUrl"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>

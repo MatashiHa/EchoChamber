@@ -24,6 +24,7 @@ export async function DELETE(
     const chamber = db.chamber.update({
       where: {
         id: chamberId,
+        //profileId: profile.id,
         // вот тут настраивается, может ли кто-то кроме админа менять роли
       },
       data: {

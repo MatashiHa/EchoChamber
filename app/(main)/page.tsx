@@ -7,12 +7,12 @@ export default async function Home() {
 
   if (profile) {
     return (
-      <div>
+      <div className="ml-4">
         <UserButton afterSignOutUrl="/" />
         <ModeToggle />
         <p className="h-full flex text-2xl font-bold">You've been logged in!</p>
-        <a href="/setup" className="hover:font-bold">
-          Go to setup page
+        <a href="/setup" className=" hover:underline text-blue-700">
+          [DEV] Go to setup page
         </a>
       </div>
     );

@@ -5,6 +5,7 @@ import { CreateChamberModal } from "../modals/create-chamber-modal";
 import { InviteModal } from "../modals/invite-modal";
 import { EditChamberModal } from "../modals/edit-chamber-modal";
 import { MembersModal } from "../modals/members-modal";
+import { CreateChannelModal } from "../modals/create-channel-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMouted] = useState(false);
@@ -23,6 +24,7 @@ export const ModalProvider = () => {
       <InviteModal/>
       <EditChamberModal />
       <MembersModal/>
+      <CreateChannelModal/>
     </>
   );
 };

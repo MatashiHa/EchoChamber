@@ -1,7 +1,12 @@
 import { Chamber } from "@prisma/client";
 import { create } from "zustand";
 
-export type ModalType = "createChamber" | "invite" | "editChamber" | "members";
+export type ModalType =
+  | "createChamber"
+  | "invite"
+  | "editChamber"
+  | "members"
+  | "createChannel";
 
 interface ModalData {
   chamber?: Chamber;

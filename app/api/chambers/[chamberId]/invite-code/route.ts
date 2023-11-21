@@ -26,7 +26,7 @@ export async function PATCH(
     const chamber = await db.chamber.update({
       where: {
         id: params.chamberId,
-        profileId: profile.id,
+        //profileId: profile.id,
       },
       // TODO: сделать возможность приглашать на сервер не только админу
       data: {

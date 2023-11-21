@@ -1,5 +1,6 @@
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { MemberRole } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function DELETE(
@@ -26,8 +27,15 @@ export async function DELETE(
     const chamber = db.chamber.update({
       where: {
         id: chamberId,
-        //profileId: profile.id,
-        // вот тут настраивается, может ли кто-то кроме админа менять роли
+        members: {
+          some: {
+            profileId: profile.id,
+            role: {
+              in: [MemberRole.MODERATOR, MemberRole.ADMIN],
+            },
+          },
+          //это фильтрует, что менять то или иное могут только админ или модератор
+        }, // вот тут настраивается, может ли кто-то кроме админа менять роли
       },
       data: {
         members: {

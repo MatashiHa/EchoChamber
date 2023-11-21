@@ -2,7 +2,7 @@
 
 import qs from "query-string"
 
-import { Check, Copy, Crown, MoreVertical , ArrowUpCircle, User, Ban , Loader2 } from "lucide-react";
+import { Crown, MoreVertical , ArrowUpCircle, User, Ban , Loader2 } from "lucide-react";
 import axios from "axios";
 import { useModal } from "@/hooks/use-modal-store";
 import {
@@ -19,8 +19,6 @@ DropdownMenuItem,
 DropdownMenuTrigger,
 
 } from "@/components/ui/dropdown-menu"
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { ChamberWithMembersWithProfiles } from "@/lib/types";
@@ -46,7 +44,6 @@ export const MembersModal = () => {
   const isModalOpen = isOpen && type === "members";
   const {chamber} = data as {chamber: ChamberWithMembersWithProfiles}
 
-  const[copied, setCopied] = useState(false);
   const[loadingId, setLoadingId] = useState("");
 
   const onKick = async (memberId: string) =>{

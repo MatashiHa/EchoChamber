@@ -1,20 +1,27 @@
-import { ModeToggle } from "@/components/mode-toggle";
-import { UserButton } from "@clerk/nextjs";
 import { initialProfile } from "@/lib/initial-profile";
+import { db } from "@/lib/db";
+import { redirect } from "next/navigation";
+import InitialModal from "@/components/modals/initial-modal";
 
-export default async function Home() {
+const SetupPage = async () => {
   const profile = await initialProfile();
 
-  if (profile) {
-    return (
-      <div className="ml-4">
-        <UserButton afterSignOutUrl="/" />
-        <ModeToggle />
-        <p className="h-full flex text-2xl font-bold">You've been logged in!</p>
-        <a href="/setup" className=" hover:underline text-blue-700">
-          [DEV] Go to setup page
-        </a>
-      </div>
-    );
+  //находим первый сервер, в котором находится пользвоатель
+  const chamber = await db.chamber.findFirst({
+    where: {
+      members: {
+        some: {
+          profileId: profile.id,
+        },
+      },
+    },
+  });
+
+  if (chamber) {
+    return redirect(`/chambers/${chamber.id}`);
   }
-}
+  // если у пользователя ещё нет сервера, то он создает его
+  return <InitialModal />;
+};
+
+export default SetupPage;

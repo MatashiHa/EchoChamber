@@ -4,6 +4,37 @@ import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { MemberRole } from "@prisma/client";
 
+export async function DELETE(
+  req: Request,
+  { params }: { params: { chamberId: string } }
+) {
+  try {
+    const profile = await currentProfile();
+    if (!profile) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+    const chamber = await db.chamber.delete({
+      where: {
+        id: params.chamberId,
+        members: {
+          some: {
+            profileId: profile.id,
+            role: {
+              in: [MemberRole.MODERATOR, MemberRole.ADMIN],
+            },
+          },
+          //это фильтрует, что менять то или иное могут только админ или модератор
+        },
+        //тут добавляется фильтрация по тому, какая роль может быть у изменяющего сервер
+      },
+    });
+    return NextResponse.json(chamber);
+  } catch (error) {
+    console.log("[CHAMBER_ID_PATCH]", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
+
 export async function PATCH(
   req: Request,
   { params }: { params: { chamberId: string } }

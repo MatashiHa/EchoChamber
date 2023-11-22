@@ -7,7 +7,8 @@ export type ModalType =
   | "editChamber"
   | "members"
   | "createChannel"
-  | "leaveChamber";
+  | "leaveChamber"
+  | "deleteChamber";
 
 interface ModalData {
   chamber?: Chamber;

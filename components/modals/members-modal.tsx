@@ -43,7 +43,7 @@ const roleIconMap = {
 export const MembersModal = () => {
   const router = useRouter();
 
-  const { isOpen, onOpen, onClose, type, data } = useModal();
+  const { onOpen, isOpen, onClose, type, data } = useModal();
 
   // открыто ли модальное окно для управления пользователями
   const isModalOpen = isOpen && type === "members";
@@ -60,16 +60,11 @@ export const MembersModal = () => {
           chamberId: chamber?.id,
         },
       });
-      console.log("Got params");
 
       const response = await axios.delete(url);
-      console.log("Got server response");
 
       router.refresh();
-      console.log("Server refreshed");
-
       onOpen("members", { chamber: response.data });
-      console.log("Server re-rendered");
     } catch (error) {
       console.log(error);
     } finally {

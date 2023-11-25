@@ -1,6 +1,5 @@
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-import { MemberRole } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function DELETE(
@@ -9,7 +8,6 @@ export async function DELETE(
 ) {
   try {
     const profile = await currentProfile();
-    //const res = req.json();
     const { searchParams } = new URL(req.url);
     const chamberId = searchParams.get("chamberId");
 
@@ -22,28 +20,18 @@ export async function DELETE(
     if (!params.memberId) {
       return new NextResponse("Member ID Missing", { status: 400 });
     }
-    console.log("Deletion started");
 
-    const chamber = db.chamber.update({
+    const chamber = await db.chamber.update({
       where: {
         id: chamberId,
-        members: {
-          some: {
-            profileId: profile.id,
-            role: {
-              in: [MemberRole.MODERATOR, MemberRole.ADMIN],
-            },
-          },
-          //это фильтрует, что менять то или иное могут только админ или модератор
-        }, // вот тут настраивается, может ли кто-то кроме админа менять роли
+        profileId: profile.id,
       },
       data: {
         members: {
-          deleteMany: {
+          delete: {
             id: params.memberId,
             profileId: {
               not: profile.id,
-              //чтобы не удалить самого себя
             },
           },
         },
@@ -59,7 +47,7 @@ export async function DELETE(
         },
       },
     });
-    console.log("Deletion complete");
+
     return NextResponse.json(chamber);
   } catch (error) {
     console.log("[MEMBERS_ID_DELETE]", error);
@@ -90,6 +78,7 @@ export async function PATCH(
     const chamber = await db.chamber.update({
       where: {
         id: chamberId,
+        profileId: profile.id,
         // вот тут настраивается, может ли кто-то кроме админа менять роли
       },
       data: {

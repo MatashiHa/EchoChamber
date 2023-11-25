@@ -13,15 +13,9 @@ export async function DELETE(
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-    const { chamberId } = params;
-
-    if (!chamberId) {
-      return new NextResponse("Chamber ID Missing", { status: 400 });
-    }
-
     const chamber = await db.chamber.delete({
       where: {
-        id: chamberId,
+        id: params.chamberId,
         members: {
           some: {
             profileId: profile.id,

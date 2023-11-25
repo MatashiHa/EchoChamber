@@ -28,7 +28,7 @@ export const DeleteChamberModal = () => {
     try {
       setIsLoading(true);
 
-      await axios.delete(`api/chambers/${chamber?.id}`);
+      await axios.delete(`/api/chambers/${chamber?.id}`);
 
       onClose();
       router.refresh();

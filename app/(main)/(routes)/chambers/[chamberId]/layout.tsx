@@ -1,4 +1,3 @@
-//import { ChamberSidebar } from "@/components/chamber/chamber-sidebar";
 import { ChannelsSidebar } from "@/components/chamber/channels-sidebar";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";

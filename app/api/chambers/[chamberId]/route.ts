@@ -13,9 +13,15 @@ export async function DELETE(
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+    const { chamberId } = params;
+
+    if (!chamberId) {
+      return new NextResponse("Chamber ID Missing", { status: 400 });
+    }
+
     const chamber = await db.chamber.delete({
       where: {
-        id: params.chamberId,
+        id: chamberId,
         members: {
           some: {
             profileId: profile.id,
@@ -30,7 +36,7 @@ export async function DELETE(
     });
     return NextResponse.json(chamber);
   } catch (error) {
-    console.log("[CHAMBER_ID_PATCH]", error);
+    console.log("[CHAMBER_ID_DELETE]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

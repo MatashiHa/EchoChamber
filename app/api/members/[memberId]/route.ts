@@ -9,12 +9,12 @@ export async function DELETE(
 ) {
   try {
     const profile = await currentProfile();
+    //const res = req.json();
     const { searchParams } = new URL(req.url);
-
     const chamberId = searchParams.get("chamberId");
 
     if (!profile) {
-      return new NextResponse("Unaothorized", { status: 401 });
+      return new NextResponse("Unauthorized", { status: 401 });
     }
     if (!chamberId) {
       return new NextResponse("Chamber ID Missing", { status: 400 });

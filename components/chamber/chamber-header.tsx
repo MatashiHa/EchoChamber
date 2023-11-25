@@ -18,10 +18,11 @@ import {
   UserPlus,
   Users,
 } from "lucide-react";
+import { ChamberWithMembersWithProfiles } from "@/types";
 
 interface ChamberHeaderProps {
-  chamber: Chamber;
-  role: MemberRole;
+  chamber: ChamberWithMembersWithProfiles;
+  role?: MemberRole;
 }
 
 export const ChamberHeader = ({ chamber, role }: ChamberHeaderProps) => {
@@ -37,11 +38,9 @@ export const ChamberHeader = ({ chamber, role }: ChamberHeaderProps) => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]">
-      <DropdownMenuItem
-            className="text-yellow-600 dark:text-yellow-400 px-3 py-2 text-sm cursor-pointer"
-          >
-            Your role: {role}
-          </DropdownMenuItem>        
+        <DropdownMenuItem className="text-yellow-600 dark:text-yellow-400 px-3 py-2 text-sm cursor-pointer">
+          Your role: {role}
+        </DropdownMenuItem>
         {isModerator && (
           <DropdownMenuItem
             onClick={() => onOpen("invite", { chamber })}
@@ -61,16 +60,18 @@ export const ChamberHeader = ({ chamber, role }: ChamberHeaderProps) => {
           </DropdownMenuItem>
         )}
         {isModerator && (
-          <DropdownMenuItem 
-          onClick={() => onOpen("members", { chamber })}
-          className="px-3 py-2 text-sm cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => onOpen("members", { chamber })}
+            className="px-3 py-2 text-sm cursor-pointer"
+          >
             Manage Members
             <Users className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
         {isModerator && (
-          <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer"
-          onClick={() => onOpen("createChannel") }
+          <DropdownMenuItem
+            className="px-3 py-2 text-sm cursor-pointer"
+            onClick={() => onOpen("createChannel")}
           >
             Create Channel
             <PlusCircle className="h-4 w-4 ml-auto" />
@@ -78,17 +79,19 @@ export const ChamberHeader = ({ chamber, role }: ChamberHeaderProps) => {
         )}
         {isModerator && <DropdownMenuSeparator />}
         {isAdmin && (
-          <DropdownMenuItem 
-          onClick={()=> onOpen("deleteChamber", { chamber } )}
-          className="text-rose-500 px-3 py-2 text-sm cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => onOpen("deleteChamber", { chamber })}
+            className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
+          >
             Delete Server
             <Trash className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
         {!isAdmin && (
-          <DropdownMenuItem 
-          onClick={()=> onOpen("leaveChamber", { chamber } )}
-          className="text-rose-500 px-3 py-2 text-sm cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => onOpen("leaveChamber", { chamber })}
+            className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
+          >
             Leave Server
             <LogOut className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>

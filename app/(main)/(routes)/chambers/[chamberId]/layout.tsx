@@ -28,6 +28,13 @@ const ChamberIdLayout = async ({
     },
   });
 
+  const member = await db.member.findFirst({
+    where: {
+      chamberId: params.chamberId,
+      profileId: profile.id,
+    },
+  });
+
   if (!chamber) {
     return redirect("/");
   }
@@ -35,7 +42,7 @@ const ChamberIdLayout = async ({
   return (
     <div className="h-full">
       <div className="hidden md:flex f-full w-60 z-20 flex-col inset-y-0 fixed">
-        <ChannelsSidebar chamberId={params.chamberId} />
+        <ChannelsSidebar chamberId={params.chamberId} role={member?.role} />
       </div>
       <main className="h-full md:pl-60">{children}</main>
     </div>

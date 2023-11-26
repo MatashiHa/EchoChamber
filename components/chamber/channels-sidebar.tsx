@@ -1,14 +1,18 @@
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-import { ChannelType } from "@prisma/client";
+import { ChannelType, MemberRole } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { ChamberHeader } from "./chamber-header";
 
 interface ChamberSidebarProps {
   chamberId: string;
+  role?: MemberRole;
 }
 
-export const ChannelsSidebar = async ({ chamberId }: ChamberSidebarProps) => {
+export const ChannelsSidebar = async ({
+  chamberId,
+  role,
+}: ChamberSidebarProps) => {
   const profile = await currentProfile();
 
   if (!profile) {
@@ -51,7 +55,7 @@ export const ChannelsSidebar = async ({ chamberId }: ChamberSidebarProps) => {
     return redirect("/");
   }
 
-  const role = chamber.members.find((member) => member.profileId)?.role;
+  //const role = chamber.members.find((member) => member.profileId)?.role;
 
   return (
     <div className="flex flex-col h-full text-primary w-full dark:bg-[#192235] bg-[#F2F3F5]">

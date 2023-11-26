@@ -3,6 +3,9 @@ import { db } from "@/lib/db";
 import { ChannelType, MemberRole } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { ChamberHeader } from "./chamber-header";
+import { ScrollArea } from "../ui/scroll-area";
+import { ChannelsSection } from "./channels-section";
+import { ChamberChannel } from "./chamber-channel";
 
 interface ChamberSidebarProps {
   chamberId: string;
@@ -60,6 +63,69 @@ export const ChannelsSidebar = async ({
   return (
     <div className="flex flex-col h-full text-primary w-full dark:bg-[#192235] bg-[#F2F3F5]">
       <ChamberHeader chamber={chamber} role={role} />
+
+      <ScrollArea className="flex-1 px-3">
+        {!!textChannels?.length && (
+          <div className="mb-2">
+            <ChannelsSection
+              sectionType="channels"
+              channelType={ChannelType.TEXT}
+              role={role}
+              label="Text Channels"
+            />
+            <div className="space-y-[2px]">
+              {textChannels.map((channel) => (
+                <ChamberChannel
+                  key={channel.id}
+                  channel={channel}
+                  role={role}
+                  chamber={chamber}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {!!audioChannels?.length && (
+          <div className="mb-2">
+            <ChannelsSection
+              sectionType="channels"
+              channelType={ChannelType.AUDIO}
+              role={role}
+              label="Voice Channels"
+            />
+            <div className="space-y-[2px]">
+              {audioChannels.map((channel) => (
+                <ChamberChannel
+                  key={channel.id}
+                  channel={channel}
+                  role={role}
+                  chamber={chamber}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {!!videoChannels?.length && (
+          <div className="mb-2">
+            <ChannelsSection
+              sectionType="channels"
+              channelType={ChannelType.VIDEO}
+              role={role}
+              label="Video Channels"
+            />
+            <div className="space-y-[2px]">
+              {videoChannels.map((channel) => (
+                <ChamberChannel
+                  key={channel.id}
+                  channel={channel}
+                  role={role}
+                  chamber={chamber}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </ScrollArea>
     </div>
   );
 };

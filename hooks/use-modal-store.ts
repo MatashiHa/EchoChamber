@@ -1,4 +1,4 @@
-import { Chamber } from "@prisma/client";
+import { Chamber, Channel, ChannelType } from "@prisma/client";
 import { create } from "zustand";
 
 export type ModalType =
@@ -8,10 +8,13 @@ export type ModalType =
   | "members"
   | "createChannel"
   | "leaveChamber"
-  | "deleteChamber";
+  | "deleteChamber"
+  | "deleteChannel";
 
 interface ModalData {
   chamber?: Chamber;
+  channel?: Channel;
+  channelType?: ChannelType;
 }
 
 interface ModalStore {

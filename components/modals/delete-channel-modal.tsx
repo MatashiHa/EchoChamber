@@ -1,40 +1,47 @@
 "use client";
-import axios from "axios";
 
-import { useModal } from "@/hooks/use-modal-store";
+import qs from "query-string";
+import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../ui/dialog";
-import { Button } from "../ui/button";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { DialogDescription } from "@radix-ui/react-dialog";
+} from "@/components/ui/dialog";
+import { useModal } from "@/hooks/use-modal-store";
+import { Button } from "@/components/ui/button";
 
-export const DeleteChamberModal = () => {
+export const DeleteChannelModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
 
-  // открыто ли модальное окно для удаления сервера
-  const isModalOpen = isOpen && type === "deleteChamber";
-  const { chamber } = data;
+  const isModalOpen = isOpen && type === "deleteChannel";
+  const { chamber, channel } = data;
 
   const [isLoading, setIsLoading] = useState(false);
 
   const onClick = async () => {
     try {
       setIsLoading(true);
+      const url = qs.stringifyUrl({
+        url: `/api/channels/${channel?.id}`,
+        query: {
+          chamberId: chamber?.id,
+        },
+      });
 
-      await axios.delete(`/api/chambers/${chamber?.id}`);
+      await axios.delete(url);
 
       onClose();
       router.refresh();
-      router.push("/");
+      router.push(`/chambers/${chamber?.id}`);
     } catch (error) {
-      console.log("DELETE_CHAMBER_MODAL", error);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -44,34 +51,24 @@ export const DeleteChamberModal = () => {
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl font-bold text-cente">
-            Delete{" "}
-            <span className="text-center text-rose-500/75">
-              "{chamber?.name}"
-            </span>{" "}
-            ?
+          <DialogTitle className="text-2xl text-center font-bold">
+            Delete Channel
           </DialogTitle>
-          <DialogDescription className="text-center text-red-400/75 h-10">
-            The chamber will be permanently deleted!
+          <DialogDescription className="text-center text-zinc-500">
+            Are you sure you want to do this? <br />
+            <span className="text-indigo-500 font-semibold">
+              #{channel?.name}
+            </span>{" "}
+            will be permanently deleted.
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="bg-gray-100  px-2 py-2">
-          <div className="flex items-center justify-between w-full mx-8 ">
-            <Button
-              disabled={isLoading}
-              onClick={onClick}
-              variant="primary"
-              className="text-2xl w-32 bg-emerald-400/50 hover:bg-emerald-500"
-            >
-              Yes
+        <DialogFooter className="bg-gray-100 px-6 py-4">
+          <div className="flex items-center justify-between w-full">
+            <Button disabled={isLoading} onClick={onClose} variant="ghost">
+              Cancel
             </Button>
-            <Button
-              disabled={isLoading}
-              onClick={onClose}
-              variant="ghost"
-              className="text-2xl w-32 bg-red-400/75 hover:bg-red-500 text-white"
-            >
-              No
+            <Button disabled={isLoading} variant="primary" onClick={onClick}>
+              Confirm
             </Button>
           </div>
         </DialogFooter>

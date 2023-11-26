@@ -8,6 +8,8 @@ import { MembersModal } from "../modals/members-modal";
 import { CreateChannelModal } from "../modals/create-channel-modal";
 import { LeaveChamberModal } from "../modals/leave-chamber-modal";
 import { DeleteChamberModal } from "../modals/delete-chamber-modal";
+import { DeleteChannelModal } from "../modals/delete-channel-modal";
+import { EditChannelModal } from "../modals/edit-channel-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMouted] = useState(false);
@@ -23,12 +25,14 @@ export const ModalProvider = () => {
   return (
     <>
       <CreateChamberModal />
-      <InviteModal/>
+      <InviteModal />
       <EditChamberModal />
-      <MembersModal/>
-      <CreateChannelModal/>
-      <LeaveChamberModal/>
-      <DeleteChamberModal/>
+      <MembersModal />
+      <CreateChannelModal />
+      <LeaveChamberModal />
+      <DeleteChamberModal />
+      <DeleteChannelModal />
+      <EditChannelModal />
     </>
   );
 };

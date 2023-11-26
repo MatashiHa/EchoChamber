@@ -4,7 +4,7 @@ import { useModal } from "@/hooks/use-modal-store";
 import { ChamberWithMembersWithProfiles } from "@/types";
 import { ChannelType, MemberRole } from "@prisma/client";
 import { ActionTooltip } from "../action-tooltip";
-import { Plus, Settings } from "lucide-react";
+import { Plus } from "lucide-react";
 
 interface ChannelsSectionProps {
   label: string;

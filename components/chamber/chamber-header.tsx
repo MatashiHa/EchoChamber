@@ -32,7 +32,7 @@ export const ChamberHeader = ({ chamber, role }: ChamberHeaderProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="focus:outline-none" asChild>
-        <button className="w-full font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2 hover:bg-slate-700/10 dark:hover:bg-slate-700/50 transition">
+        <button className="w-full font-semibold px-3 flex items-center h-12 border-neutral-200/25 dark:border-neutral-800 border-b-2 hover:bg-slate-700/10 dark:hover:bg-slate-700/50 transition">
           {chamber.name}
           <ChevronDown className="h-5 w-5 ml-auto" />
         </button>

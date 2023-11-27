@@ -2,11 +2,8 @@
 
 import { Member, MemberRole, Profile, Chamber } from "@prisma/client";
 import {
-  ArrowUp,
   ArrowUpCircle,
   Crown,
-  ShieldAlert,
-  ShieldCheck,
   User,
 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";

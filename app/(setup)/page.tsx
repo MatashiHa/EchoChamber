@@ -2,8 +2,8 @@ import { initialProfile } from "@/lib/initial-profile";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import InitialModal from "@/components/modals/initial-modal";
-const SetupPage =async () => {
 
+const SetupPage = async () => {
   const profile = await initialProfile();
 
   //находим первый сервер, в котором находится пользвоатель
@@ -11,19 +11,17 @@ const SetupPage =async () => {
     where: {
       members: {
         some: {
-          profileId: profile.id
-        }
-      }
-    }
+          profileId: profile.id,
+        },
+      },
+    },
+  });
 
-  })
+  if (chamber) {
+    return redirect(`/chambers/${chamber.id}`);
+  }
+  // если у пользователя ещё нет сервера, то он создает его
+  return <InitialModal />;
+};
 
-  if (chamber)  {
-    return redirect(`chamber/${chamber.id}`)
-  }
-  else {
-    return(<InitialModal/>)
-  }
-}
- 
 export default SetupPage;

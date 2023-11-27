@@ -22,12 +22,11 @@ export const MobileToggle = ({chamberId, role}:{chamberId: string, role:MemberRo
             <div className="w-[72px]">
                 <NavigationSidebar/>
             </div>
-            <div className = "border dark:border-gray-900">
+            <div className = "w-full border dark:border-gray-900">
             <ChannelsSidebar chamberId={chamberId} role ={role}/>
             </div>
-            <div className = "border dark:border-gray-900">
+            <div className = "w-full border dark:border-gray-900">
             <MembersSidebar chamberId={chamberId}/>
-
             </div>
         </SheetContent>  
         </Sheet>

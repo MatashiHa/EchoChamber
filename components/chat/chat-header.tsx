@@ -36,13 +36,13 @@ export const ChatHeader = ( {
         {type === "conversation" && 
         <UserAvatar
         src={imageUrl}
-        className="h-8 w-8 md:h-8 md:w-8 mr-2 ml-2"/>}
+        className="h-8 w-8 lg:h-8 lg:w-8 mr-2 ml-2"/>}
         <p
         className="font-semibold text-md text-black dark:text-white"
         >
         {name}
         </p>
-        <div className="md:ml-2 ml-auto">
+        <div className="lg:ml-2 ml-auto">
            | <SocketIndicator/>
         </div>
     </div>

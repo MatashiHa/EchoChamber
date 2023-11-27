@@ -14,11 +14,11 @@ export const MobileToggle = ({chamberId, role}:{chamberId: string, role:MemberRo
     
     return (
         <Sheet>
-        <SheetTrigger className ="md:hidden hover:bg-zinc-600 rounded">
+        <SheetTrigger className ="lg:hidden hover:bg-zinc-600 rounded">
             {/* "md-hidden" означает, что эта кнопка показывается только при узком разрешении или на мобильных устройствах */}
             <Menu/>
         </SheetTrigger>
-        <SheetContent side="left" className="p-0 flex gap-0">
+        <SheetContent side="left" className="p-0 flex gap-0 ">
             <div className="w-[72px]">
                 <NavigationSidebar/>
             </div>

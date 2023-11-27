@@ -44,7 +44,7 @@ export const ChamberMember = ({ member, chamber }: ChamberMemberProps) => {
     >
       <UserAvatar
         src={member.profile.imageUrl}
-        className="h-8 w-8 md:h-8 md:w-8"
+        className="h-8 w-8 lg:h-8 lg:w-8"
       />
       <p
         className={cn(

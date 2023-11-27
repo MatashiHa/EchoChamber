@@ -100,7 +100,7 @@ model Channel {
 model Message {
   id String @id @default(uuid())
 
-  Content String @db.Text
+  content String @db.Text
   //длинные сообщения
 
   fileUrl String? @db.Text

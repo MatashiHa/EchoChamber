@@ -10,6 +10,7 @@ import { LeaveChamberModal } from "../modals/leave-chamber-modal";
 import { DeleteChamberModal } from "../modals/delete-chamber-modal";
 import { DeleteChannelModal } from "../modals/delete-channel-modal";
 import { EditChannelModal } from "../modals/edit-channel-modal";
+import MessageFileModal from "../modals/message-file-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMouted] = useState(false);
@@ -33,6 +34,7 @@ export const ModalProvider = () => {
       <DeleteChamberModal />
       <DeleteChannelModal />
       <EditChannelModal />
+      <MessageFileModal/>
     </>
   );
 };

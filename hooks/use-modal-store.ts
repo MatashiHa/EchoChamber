@@ -10,12 +10,15 @@ export type ModalType =
   | "leaveChamber"
   | "deleteChamber"
   | "deleteChannel"
-  | "editChannel";
+  | "editChannel"
+  | "messageFile";
 
 interface ModalData {
   chamber?: Chamber;
   channel?: Channel;
   channelType?: ChannelType;
+  apiUrl?: string;
+  query?: Record<string, any>;
 }
 
 interface ModalStore {

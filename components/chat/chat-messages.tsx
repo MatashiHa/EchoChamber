@@ -54,7 +54,7 @@ export const ChatMessages = ({
     if (status === "error") {
         return(
             <div className = "flex-1 flex flex-col justify-center items-center text-red-500 dark:text-red-400">
-            <XCircle  className="h-7 w-7 animate"/> An error of loading messages
+            <XCircle  className="h-7 w-7"/> An error of loading messages
         </div>
         )
 

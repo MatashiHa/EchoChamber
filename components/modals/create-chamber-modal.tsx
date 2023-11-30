@@ -114,7 +114,7 @@ export const CreateChamberModal = () => {
                       <input
                         disabled={isLoading}
                         className="bg-zinc-300/50 border-0 h-8 p-2 rounded focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                        placeholder="Enter server name"
+                        placeholder="Enter chamber name"
                         {...field}
                       />
                     </FormControl>

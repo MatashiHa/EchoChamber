@@ -1,10 +1,24 @@
-import { Chamber } from "@prisma/client";
+import { Chamber, Channel, ChannelType } from "@prisma/client";
 import { create } from "zustand";
 
-export type ModalType = "createChamber" | "invite" | "editChamber";
+export type ModalType =
+  | "createChamber"
+  | "invite"
+  | "editChamber"
+  | "members"
+  | "createChannel"
+  | "leaveChamber"
+  | "deleteChamber"
+  | "deleteChannel"
+  | "editChannel"
+  | "messageFile";
 
 interface ModalData {
   chamber?: Chamber;
+  channel?: Channel;
+  channelType?: ChannelType;
+  apiUrl?: string;
+  query?: Record<string, any>;
 }
 
 interface ModalStore {

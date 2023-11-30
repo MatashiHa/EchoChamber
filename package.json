@@ -68,5 +68,10 @@
     "prisma": "^5.5.2",
     "tailwindcss": "latest",
     "typescript": "latest"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }

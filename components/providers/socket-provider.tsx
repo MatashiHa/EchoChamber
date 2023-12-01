@@ -34,7 +34,7 @@ export const SocketProvider =  ({
     useEffect(() => {
         const socketInstance = new (ClientIO as any)(process.env.NEXT_PUBLIC_SITE_URL!, {
             // эта строка не меняется, там страшные ошибки, если именно её изменить
-            path: "api/socket/io",
+            path: "/api/socket/io",
             addTrailingSlash: false
         })
         socketInstance.on("connect",() => {

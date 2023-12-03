@@ -83,7 +83,7 @@ export const ChamberHeader = ({ chamber, role }: ChamberHeaderProps) => {
             onClick={() => onOpen("deleteChamber", { chamber })}
             className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
           >
-            Delete Server
+            Delete Chamber
             <Trash className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
@@ -92,7 +92,7 @@ export const ChamberHeader = ({ chamber, role }: ChamberHeaderProps) => {
             onClick={() => onOpen("leaveChamber", { chamber })}
             className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
           >
-            Leave Server
+            Leave Chamber
             <LogOut className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}

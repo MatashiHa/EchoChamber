@@ -3,10 +3,19 @@
 import { Member, MemberRole, Profile } from "@prisma/client";
 import { UserAvatar } from "../ui/user-avatar";
 import { ActionTooltip } from "../action-tooltip";
-import { ArrowUpCircle, Crown, Edit, FileIcon, X } from "lucide-react";
+import { ArrowUpCircle, Crown, Edit, FileIcon, Trash, X } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import * as z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import qs from "query-string";
+import axios from "axios";
+import { useModal } from "@/hooks/use-modal-store";
 
 interface ChatItemProps {
   id: string;
@@ -29,6 +38,10 @@ const roleIconMap = {
   ADMIN: <Crown className="h-4 w-4 mr-2 text-yellow-600" />,
 };
 
+const formSchema = z.object({
+  content: z.string().min(1),
+});
+
 export const ChatItem = ({
   id,
   content,
@@ -42,7 +55,47 @@ export const ChatItem = ({
   socketQuery,
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const { onOpen } = useModal();
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      content: content,
+    },
+  });
+
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.key === "Escape" || event.keyCode === 27) {
+        setIsEditing(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  const isLoading = form.formState.isSubmitting;
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const url = qs.stringifyUrl({
+        url: `${socketUrl}/${id}`,
+        query: socketQuery,
+      });
+      await axios.patch(url, values);
+
+      form.reset();
+      setIsEditing(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    form.reset({
+      content: content,
+    });
+  }, [content]);
 
   const fileType = fileUrl?.split(".").pop();
 
@@ -117,15 +170,62 @@ export const ChatItem = ({
               )}
             </p>
           )}
+          {!fileUrl && isEditing && (
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="flex items-center w-full gap-x-2 pt-2"
+              >
+                <FormField
+                  control={form.control}
+                  name="content"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormControl>
+                        <div className="relative w-full">
+                          <Input
+                            disabled={isLoading}
+                            className="p-2 bg-slate-200/90 dark:bg-slate-700/75 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-slate-600 dark: dark:text-slate-200"
+                            placeholder="Edited message"
+                            {...field}
+                          />
+                        </div>
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <Button disabled={isLoading} size="sm" variant="primary">
+                  Save
+                </Button>
+              </form>
+              <span className="text-[10px] mt-1 text-slate-400">
+                Press Esc to cancel, Enter to save
+              </span>
+            </Form>
+          )}
         </div>
       </div>
       {canDeleteMessage && (
         <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 top-2 right-5 bg-white dark:bg-slate-800 border rounded-sm">
           {canEditMessage && (
             <ActionTooltip label="Edit">
-              <Edit className="cursor-pointer ml-auto w-4 h-4 text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition" />
+              <Edit
+                onClick={() => setIsEditing(true)}
+                className="cursor-pointer ml-auto w-4 h-4 text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition"
+              />
             </ActionTooltip>
           )}
+          <ActionTooltip label="Delete">
+            <Trash
+              onClick={() =>
+                onOpen("deleteMessage", {
+                  apiUrl: `${socketUrl}/${id}`,
+                  query: socketQuery,
+                })
+              }
+              className="cursor-pointer ml-auto w-4 h-4 text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition"
+            />
+          </ActionTooltip>
         </div>
       )}
     </div>

@@ -61,7 +61,7 @@ export const ChannelsSidebar = async ({
   //const role = chamber.members.find((member) => member.profileId)?.role;
 
   return (
-    <div className="flex flex-col h-full text-primary w-full dark:bg-[#192235] bg-[#F2F3F5]">
+    <div className="flex flex-col h-full text-primary w-full dark:bg-[#192235] bg-[#F5F2F3]">
       <ChamberHeader chamber={chamber} role={role} />
 
       <ScrollArea className="flex-1 px-3">

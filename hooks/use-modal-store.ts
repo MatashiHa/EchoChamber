@@ -11,7 +11,8 @@ export type ModalType =
   | "deleteChamber"
   | "deleteChannel"
   | "editChannel"
-  | "messageFile";
+  | "messageFile"
+  | "deleteMessage";
 
 interface ModalData {
   chamber?: Chamber;

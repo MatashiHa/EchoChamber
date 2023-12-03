@@ -1,11 +1,7 @@
 "use client";
 
 import { Member, MemberRole, Profile, Chamber } from "@prisma/client";
-import {
-  ArrowUpCircle,
-  Crown,
-  User,
-} from "lucide-react";
+import { ArrowUpCircle, Crown, User } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -38,7 +34,7 @@ export const ChamberMember = ({ member, chamber }: ChamberMemberProps) => {
     <button
       onClick={onClick}
       className={cn(
-        "group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1",
+        "group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-slate-700/50 transition mb-1",
         params?.memberId === member.id && "bg-zinc-700/20 dark:bg-zinc-700"
       )}
     >

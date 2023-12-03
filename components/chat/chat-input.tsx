@@ -60,13 +60,13 @@ export const ChatInput = ({ apiUrl, query, name, type }: CahtInputProps) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <div className="relative p-4 pb-6">
+                <div className="relative p-4 pb-6 pt-0">
                   <button
                     type="button"
                     onClick={() => {
                       onOpen("messageFile", { apiUrl, query });
                     }}
-                    className="absolute top-7 left-8 h-[24px] w-[24px]
+                    className="absolute top-3 left-8 h-[24px] w-[24px]
                                     bg-slate-400 dark:bg-slate-400 
                                     hover:bg-slate-500
                                     dark:hover:bg-zinc-300 transition rounded-full p-1 flex
@@ -89,7 +89,7 @@ export const ChatInput = ({ apiUrl, query, name, type }: CahtInputProps) => {
                                         dark:bg-slate-600 dark:text-slate-200"
                   />
                   <div
-                    className="absolute top-7 right-8 
+                    className="absolute top-3 right-8 
                                      text-slate-400 dark:text-slate-400 
                                      hover:text-slate-500
                                     dark:hover:text-zinc-300 transition"

@@ -38,12 +38,14 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
   }
   return (
     <div className="flex flex-col h-screen lg:mr-[256px]">
-      <ChatHeader
-        name={channel.name}
-        chamberId={channel.chamberId}
-        type="channel"
-        role={member?.role}
-      />
+      <div className="">
+        <ChatHeader
+          name={channel.name}
+          chamberId={channel.chamberId}
+          type="channel"
+          role={member?.role}
+        />
+      </div>
       {channel.type === ChannelType.TEXT && (
         <>
           <ChatMessages

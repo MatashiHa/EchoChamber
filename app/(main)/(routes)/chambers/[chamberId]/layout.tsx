@@ -42,11 +42,13 @@ const ChamberIdLayout = async ({
 
   return (
     <div className="h-full justify-between">
-      <div className="hidden lg:flex f-full w-60 z-20 flex-col inset-y-0 border dark:border-gray-900 fixed">
+      <div className="hidden lg:flex h-full w-60 z-20 flex-col inset-y-0 border dark:border-gray-900 fixed">
         <ChannelsSidebar chamberId={params.chamberId} role={member?.role} />
       </div>
-      <main className="lg:pl-60 bg-white dark:bg-slate-800">{children}</main>
-      <div className="hidden lg:flex top-0 right-0 f-full w-64 z-20 flex-col inset-y-0 border dark:border-gray-900 fixed">
+      <main className="lg:pl-60 bg-white dark:bg-slate-800 h-full">
+        {children}
+      </main>
+      <div className="hidden lg:flex top-0 right-0 h-full w-64 z-20 flex-col inset-y-0 border dark:border-gray-900 fixed">
         <MembersSidebar chamberId={params.chamberId} role={member?.role} />
       </div>
     </div>

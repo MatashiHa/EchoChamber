@@ -21,7 +21,7 @@ export const ChatHeader = ({
 }: ChatHeaderProps) => {
   return (
     <div
-      className="w-full fixed text-md font-semibold px-3 flex items-center h-12 border-b-2
+      className="fixed w-full text-md font-semibold px-3 flex items-center h-12 border-b-2
     bg-[#F5F2F3] 
     dark:bg-[#192235]
     border-[#E9E9EA]

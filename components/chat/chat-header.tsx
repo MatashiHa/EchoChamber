@@ -26,7 +26,6 @@ export const ChatHeader = ({
     dark:bg-[#192235]
     border-[#E9E9EA]
     dark:border-slate-700/50
-    opacity-75
     "
     >
       <MobileToggle chamberId={chamberId} role={role} />

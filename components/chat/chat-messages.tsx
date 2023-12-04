@@ -58,7 +58,7 @@ export const ChatMessages = ({
     bottomRef,
     loadMore: fetchNextPage,
     shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
-    count: data?.pages?.[0].items?.length ?? 0,
+    count: data?.pages?.[0]?.items?.length ?? 0,
   });
 
   if (status === "loading") {
@@ -76,7 +76,10 @@ export const ChatMessages = ({
     );
   }
   return (
-    <div ref={chatRef} className="flex-1 flex flex-col py-4 overflow-y-auto">
+    <div
+      ref={chatRef}
+      className="flex-1 flex flex-col py-4 overflow-y-auto mt-12"
+    >
       {!hasNextPage && <div className="flex-1" />}
       {!hasNextPage && <ChatWelcome type={type} name={name} />}
       {hasNextPage && (

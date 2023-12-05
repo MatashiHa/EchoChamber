@@ -36,7 +36,7 @@
     "date-fns": "^2.30.0",
     "emoji-mart": "^5.5.2",
     "fs": "^0.0.1-security",
-    "livekit-client": "^1.15.2",
+    "livekit-client": "^1.15.3",
     "livekit-server-sdk": "^1.2.7",
     "lucide-react": "^0.284.0",
     "net": "^1.0.2",

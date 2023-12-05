@@ -46,7 +46,7 @@ export const MembersSidebar = async ({
   }
 
   return (
-    <div className="flex flex-col h-full text-primary w-full dark:bg-[#192235] bg-[#F2F3F5]">
+    <div className="flex flex-col h-full text-primary w-full dark:bg-[#192235] bg-[#F5F2F3]">
       <ScrollArea className="flex-1 px-3">
         {!!members?.length && (
           <div className="mb-2">

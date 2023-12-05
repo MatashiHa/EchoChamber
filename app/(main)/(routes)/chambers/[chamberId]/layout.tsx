@@ -1,6 +1,5 @@
 import { ChannelsSidebar } from "@/components/chamber/channels-sidebar";
 import { MembersSidebar } from "@/components/chamber/members-sidebar";
-//import { MembersSidebar } from "@/components/chamber/members-sidebar";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { redirectToSignIn } from "@clerk/nextjs";
@@ -43,11 +42,13 @@ const ChamberIdLayout = async ({
 
   return (
     <div className="h-full justify-between">
-      <div className="hidden lg:flex f-full w-60 z-20 flex-col inset-y-0 border dark:border-gray-900 fixed">
+      <div className="hidden lg:flex h-full w-60 z-20 flex-col inset-y-0 border dark:border-gray-900 fixed">
         <ChannelsSidebar chamberId={params.chamberId} role={member?.role} />
       </div>
-      <main className="h-screen lg:pl-60">{children}</main>
-      <div className="hidden lg:flex top-0 right-0 f-full w-64 z-20 flex-col inset-y-0 border dark:border-gray-900 fixed">
+      <main className="lg:pl-60 bg-white dark:bg-slate-800 h-full">
+        {children}
+      </main>
+      <div className="hidden lg:flex top-0 right-0 h-full w-64 z-20 flex-col inset-y-0 border dark:border-gray-900 fixed">
         <MembersSidebar chamberId={params.chamberId} role={member?.role} />
       </div>
     </div>

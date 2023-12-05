@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Project description
 
-## Getting Started
+Our project is an application for sending messages and organizing audio and video conferences with the following functions:
 
-First, run the development server:
+-Real-time messaging using Socket.io
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-Sending Attachments as Messages using Upload Thing
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-Deleting and editing messages in real time for all users
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-Creating and configuring a server
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+-Creating channels for text, audio and video calls
 
-## Learn More
+-Calls between participants
 
-To learn more about Next.js, take a look at the following resources:
+-Video calls between participants
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-Calls and chat between participants 1 on 1
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+-A system of unique invitations in the form of links
 
-## Deploy on Vercel
+-Authentication using a Clerk
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-The server admin will be able to configure the server, make others moderators, and those, in turn, like the admin, will be able to expel and invite other users, delete any messages and create channels.
